@@ -1,0 +1,50 @@
+<h1>Data Dashboard</h1>
+
+<button class="btn btn-outline-primary" (click)="readSpreadsheet()">Read Spreadsheet from Clipboard</button>
+&nbsp;
+<button class="btn btn-outline-primary" (click)="readSample1()">Read Sample Data 1</button>
+&nbsp;
+<button class="btn btn-outline-primary" (click)="readSample2()">Read Sample Data 2</button>
+
+
+<div *ngIf="clipboardService.getRawData() | async; let rawData">
+
+  <accordion>
+    <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
+      <div class="overflow-auto bg-light">
+        <pre>{{rawData | json}}</pre>
+      </div>
+    </accordion-group>
+
+    <accordion-group *ngFor="let proc of procs; let i=index" heading="Step {{i}}: {{proc}}" [isOpen]="(i+1) === procs.length">
+      <h2>Step {{i}}: {{proc}}</h2>
+
+      <!-- h2>Output</h2 -->
+      <div *ngIf="outputs[i]?._type === 'jsonTable'">
+        <h3>Data in Table Form</h3>
+        <table class="table table-bordered table-striped table-sm" *ngIf="outputs[i].table; let rows">
+          <thead>
+          <tr>
+            <th *ngFor="let header of rows[0]">{{header}}</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let row of rows.slice(1); let rowIndex=index">
+            <td *ngFor="let col of row; let colIndex=index" [attr.data-row-col]="rowIndex + '-' + colIndex">{{col}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="overflow-auto bg-light" *ngIf="outputs[i]._type !== 'jsonTable'">
+        <!--    {{output}}-->
+        <pre>{{outputs[i] | json}}</pre>
+      </div>
+    </accordion-group>
+
+  </accordion>
+
+  <span *ngFor="let choice of textprocService.getProcs()">
+    <button class="btn btn-outline-primary" (click)="applyProc(choice)">{{choice}}</button>
+  </span>
+  <button class="btn btn-outline-primary" (click)="tryAsSpreadsheet()">Try As Spreadsheet</button>
+</div>

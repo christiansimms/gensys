@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Extract New Field</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>
+    Full Text: {{this.fullText}}
+  </p>
+  <p>
+    Selected Text: {{selectedText}}
+  </p>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let choice of choices">
+      <div class="card">
+        <div class="card-header">
+          {{choice.strategy.name}}
+        </div>
+        <div class="card-body">
+          Parameters:
+          <div *ngFor="let param of choice.strategy.params">
+            <div [ngSwitch]="param.type">
+              {{param.name}}:
+              <input
+                *ngSwitchCase="FieldType.string"
+                type="text"
+                [(ngModel)]="choice.computedParams[param.name]"
+              >
+              <input
+                *ngSwitchCase="FieldType.number"
+                type="number"
+                [(ngModel)]="choice.computedParams[param.name]"
+              >
+              <input
+                *ngSwitchCase="FieldType.regex"
+                type="text"
+                [(ngModel)]="choice.computedParams[param.name]"
+              >
+            </div>
+          </div>
+          Sample Output:
+          <div *ngFor="let out of choice.computedOutput">
+            {{out}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onConfirm()">Save</button>
+  <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
+</div>
