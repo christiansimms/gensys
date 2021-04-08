@@ -20,7 +20,7 @@ export class RegViewEntityComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const id = params.id;
-      this.dataOb = this.http.get<any[]>(`/api/data/entity/${id}`);
+      this.dataOb = this.http.get<any[]>(`/api/data/entity/${id}?includeChildren=true`);
     });
   }
 }

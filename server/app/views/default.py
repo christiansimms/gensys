@@ -49,11 +49,11 @@ def ajax_item(request):
 
     method = request.method
     if method == 'GET':
-        # Maybe load child objects. TEMP
-        # if entity_name == 'module':
-            # Load nodes.
-            # obj.nodes = request.dbsession.query(node).filter_by(module_id=entity_id).all()
-        pass
+        # Maybe load child objects.
+        includeChildren = request.params.get('includeChildren', '')
+        if includeChildren:
+            # Load children.
+            obj.children = request.dbsession.query(entity_cl).filter_by(parent_id=entity_id).all()
     elif method == 'POST':
         obj.update_fields(request)
     elif method == 'DELETE':
