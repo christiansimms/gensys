@@ -16,6 +16,7 @@ import { SheetComponent } from './sheet/sheet.component';
 import {HttpClientModule} from '@angular/common/http';
 import { RegImportComponent } from './reg/reg-import/reg-import.component';
 import { RegAddEntityComponent } from './reg/reg-add-entity/reg-add-entity.component';
+import { FlashComponent } from './reg/flash/flash.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegAddEntityComponent } from './reg/reg-add-entity/reg-add-entity.compo
     RegSheetComponent,
     SheetComponent,
     RegImportComponent,
-    RegAddEntityComponent
+    RegAddEntityComponent,
+    FlashComponent
   ],
   imports: [
     BrowserModule,
