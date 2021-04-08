@@ -5,6 +5,7 @@
     <thead>
     <tr>
       <th>Id</th>
+      <th>Parent Id</th>
       <th>Name</th>
       <th>Type</th>
       <th>Actions</th>
@@ -13,6 +14,7 @@
     <tbody>
     <tr *ngFor="let row of data">
       <td><a routerLink="/reg/entity/{{row.id}}">{{row.id}}</a></td>
+      <td>{{row.parent_id}}</td>
       <td>{{row.name}}</td>
       <td>{{row.type}}</td>
       <td>
