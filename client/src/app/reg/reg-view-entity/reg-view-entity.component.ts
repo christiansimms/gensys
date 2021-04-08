@@ -23,7 +23,4 @@ export class RegViewEntityComponent implements OnInit {
       this.dataOb = this.http.get<any[]>(`/api/data/entity/${id}`);
     });
   }
-
-  addChild(row: any): void {
-  }
 }

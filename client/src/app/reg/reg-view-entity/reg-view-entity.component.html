@@ -3,7 +3,7 @@
 <div *ngIf="dataOb | async; let row">
   <p>
     Actions:
-    <button type="button" class="btn btn-outline-primary" (click)="addChild(row)">Add Child</button>
+    <a routerLink="/reg/entity/{{row.id}}/add" class="btn btn-outline-primary">Add Child</a>
   </p>
 
   <p><strong>Id:</strong> {{row.id}}</p>
