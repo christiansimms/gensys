@@ -25,7 +25,7 @@ export class RegAddEntityComponent implements OnInit {
   addEntity(obj): void {
     this.http.post('/api/data/entity', obj).subscribe(val => {
       console.log('GOT RESULT', val);
-      this.flashService.tellSuccess('Entity saved', '/reg/home');
+      this.flashService.tellSuccess('Entity saved', '/reg/entity');
     });
   }
 }

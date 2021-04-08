@@ -1,4 +1,8 @@
 <h1>Entities</h1>
+<p>
+Actions:
+<a routerLink="/reg/entity/add">Add Entity</a>
+</p>
 
 <div *ngIf="dataOb | async; let data">
   <table class="table table-striped">
@@ -14,7 +18,7 @@
     <tbody>
     <tr *ngFor="let row of data">
       <td><a routerLink="/reg/entity/{{row.id}}">{{row.id}}</a></td>
-      <td>{{row.parent_id}}</td>
+      <td><a routerLink="/reg/entity/{{row.parent_id}}">{{row.parent_id}}</a></td>
       <td>{{row.name}}</td>
       <td>{{row.type}}</td>
       <td>

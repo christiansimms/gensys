@@ -12,6 +12,7 @@ import {FlashService} from "../flash.service";
 export class RegAddChildEntityComponent implements OnInit {
 
   dataOb: Observable<any>;
+  dataId;
   obj = {
     parent_id: '',
     name: '',
@@ -27,6 +28,7 @@ export class RegAddChildEntityComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
       const id = params.id;
+      this.dataId = id;
       this.obj.parent_id = id;
       this.dataOb = this.http.get<any[]>(`/api/data/entity/${id}`);
     });
@@ -35,7 +37,7 @@ export class RegAddChildEntityComponent implements OnInit {
   addEntity(obj): void {
     this.http.post('/api/data/entity', obj).subscribe(val => {
       console.log('GOT RESULT', val);
-      this.flashService.tellSuccess('Entity saved', '/reg/home');
+      this.flashService.tellSuccess('Entity saved', `/reg/entity/${this.dataId}`);
     });
   }
 }
