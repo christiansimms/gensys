@@ -37,3 +37,29 @@ def ajax_root(request):
     else:
         raise Exception('Bad method: {}'.format(method))
 
+@view_config(route_name='ajax_item', renderer='json')
+def ajax_item(request):
+    # Get params.
+    entity_name = request.matchdict['entity_name']
+    entity_id = request.matchdict['entity_id']
+
+    # Default way.
+    entity_cl = getattr(mymodel, entity_name)
+    obj = request.dbsession.query(entity_cl).filter_by(id=entity_id).one()
+
+    method = request.method
+    if method == 'GET':
+        # Maybe load child objects. TEMP
+        # if entity_name == 'module':
+            # Load nodes.
+            # obj.nodes = request.dbsession.query(node).filter_by(module_id=entity_id).all()
+        pass
+    elif method == 'POST':
+        obj.update_fields(request)
+    elif method == 'DELETE':
+        request.dbsession.delete(obj)
+    else:
+        raise Exception('Unknown method: {}'.format(method))
+
+    return obj
+

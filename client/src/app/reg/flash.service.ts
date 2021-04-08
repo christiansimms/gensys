@@ -33,6 +33,13 @@ export class FlashService {
     if (url) {
       //noinspection JSIgnoredPromiseFromCall
       this.router.navigate([url]);
+    } else {
+      // Force page reload.
+      // Snagged from: https://stackoverflow.com/questions/40983055/how-to-reload-the-current-route-with-the-angular-2-router
+      const currentUrl = this.router.url;
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+      });
     }
   }
 
