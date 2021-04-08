@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from "rxjs";
+import {ActivatedRoute, Params} from "@angular/router";
+import {HttpClient} from "@angular/common/http";
+import {FlashService} from "../flash.service";
 
 @Component({
   selector: 'app-reg-add-child-entity',
@@ -7,9 +11,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegAddChildEntityComponent implements OnInit {
 
-  constructor() { }
+  dataOb: Observable<any>;
+  obj = {
+    parent_id: '',
+    name: '',
+    type: '',
+  };
+
+  constructor(
+    public route: ActivatedRoute,
+    private http: HttpClient,
+    private flashService: FlashService,
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      const id = params.id;
+      this.obj.parent_id = id;
+      this.dataOb = this.http.get<any[]>(`/api/data/entity/${id}`);
+    });
   }
 
+  addEntity(obj): void {
+    this.http.post('/api/data/entity', obj).subscribe(val => {
+      console.log('GOT RESULT', val);
+      this.flashService.tellSuccess('Entity saved', '/reg/home');
+    });
+  }
 }
