@@ -5,6 +5,7 @@ import {RegRootComponent} from './reg/reg-root/reg-root.component';
 import {RegHomeComponent} from './reg/reg-home/reg-home.component';
 import {RegSheetComponent} from './reg/reg-sheet/reg-sheet.component';
 import {RegImportComponent} from './reg/reg-import/reg-import.component';
+import {RegAddEntityComponent} from './reg/reg-add-entity/reg-add-entity.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'start', pathMatch: 'full'},
@@ -13,6 +14,7 @@ const routes: Routes = [
     path: 'reg', component: RegRootComponent, children: [
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: 'home', component: RegHomeComponent},
+      {path: 'entity/add', component: RegAddEntityComponent},
       {path: 'import', component: RegImportComponent},
       {path: 'sheet', component: RegSheetComponent},
     ]

@@ -15,6 +15,7 @@ import { RegSheetComponent } from './reg/reg-sheet/reg-sheet.component';
 import { SheetComponent } from './sheet/sheet.component';
 import {HttpClientModule} from '@angular/common/http';
 import { RegImportComponent } from './reg/reg-import/reg-import.component';
+import { RegAddEntityComponent } from './reg/reg-add-entity/reg-add-entity.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { RegImportComponent } from './reg/reg-import/reg-import.component';
     ExtractFieldComponent,
     RegSheetComponent,
     SheetComponent,
-    RegImportComponent
+    RegImportComponent,
+    RegAddEntityComponent
   ],
   imports: [
     BrowserModule,
