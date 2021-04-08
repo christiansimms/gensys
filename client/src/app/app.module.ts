@@ -18,6 +18,7 @@ import { RegImportComponent } from './reg/reg-import/reg-import.component';
 import { RegAddEntityComponent } from './reg/reg-add-entity/reg-add-entity.component';
 import { FlashComponent } from './reg/flash/flash.component';
 import { RegEntityComponent } from './reg/reg-entity/reg-entity.component';
+import { RegViewEntityComponent } from './reg/reg-view-entity/reg-view-entity.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { RegEntityComponent } from './reg/reg-entity/reg-entity.component';
     RegImportComponent,
     RegAddEntityComponent,
     FlashComponent,
-    RegEntityComponent
+    RegEntityComponent,
+    RegViewEntityComponent
   ],
   imports: [
     BrowserModule,

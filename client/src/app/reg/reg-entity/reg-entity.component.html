@@ -12,7 +12,7 @@
     </thead>
     <tbody>
     <tr *ngFor="let row of data">
-      <td>{{row.id}}</td>
+      <td><a routerLink="/reg/entity/{{row.id}}">{{row.id}}</a></td>
       <td>{{row.name}}</td>
       <td>{{row.type}}</td>
       <td>

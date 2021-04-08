@@ -1,0 +1,12 @@
+<h1>View Entity</h1>
+
+<div *ngIf="dataOb | async; let row">
+  <p>
+    Actions:
+    <button type="button" class="btn btn-outline-primary" (click)="addChild(row)">Add Child</button>
+  </p>
+
+  <p><strong>Id:</strong> {{row.id}}</p>
+  <p><strong>Name:</strong> {{row.name}}</p>
+  <p><strong>Type:</strong> {{row.type}}</p>
+</div>
