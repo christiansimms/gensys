@@ -1,3 +1,7 @@
+from datetime import datetime
+from datetime import date
+from decimal import Decimal
+
 from sqlalchemy import (
     Column,
     DateTime,
@@ -18,6 +22,47 @@ class MyModel(Base):
     value = Column(Integer)
 Index('my_index', MyModel.name, unique=True, mysql_length=255)
 
+
+def make_value_json_compatible(val):
+    typ = type(val)
+    # log.debug('makeValueJsonCompatible: %s: %s' % (typ, val))
+    if typ is datetime:
+        return val.strftime('%Y-%m-%dT%H:%M:%S')
+    elif typ is date:
+        return val.strftime('%Y-%m-%d')
+        # return val.strftime('%Y-%m-%dT00:00:00')
+    elif typ is Decimal:
+        return str(val)
+    elif typ is bytes:
+        # not easy to json-serialize BLOB, and what's the point, it cannot be used on client side directly
+        return '(BLOB)'
+    else:
+        return val
+
+
+def get_param(request, name, default_value=None):
+    """ Return required request param, or default_value if not found. """
+
+    if request.body:
+        if default_value is None:
+            # This is required.
+            if request.POST:
+                # Must be a form POST.
+                return request.POST[name]
+            else:
+                # Assume it's JSON in body of request, and it's required.
+                return request.json_body[name]
+        else:
+            # This is optional.
+            if request.POST:
+                # Must be a form POST.
+                return request.POST.get(name, default_value)
+            else:
+                # Assume it's JSON in body of request, and it's required.
+                return request.json_body.get(name, default_value)
+    else:
+        # Assume it's uri-encoded.
+        return request.params.get(name, default_value)
 
 class CustomBase(Base):
     __abstract__ = True
@@ -66,7 +111,7 @@ class CustomBase(Base):
             # Have to use '' instead of None, b/c None means it's required.
             val = get_param(request, name, '')
 
-            if True:  # val:  2016-11-03  this if statement messes up if 0 is passed as an integer
+            if val:   # 2021-04-07: ignore: True:  # val:  2016-11-03  this if statement messes up if 0 is passed as an integer
                 # The if-stmt below is in same order as genmodel's getPythonColumnDecl.
                 if typ == 'Text':
                     if name == 'file_system':  # TODO: ugly, this is a json parameter

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-reg-add-entity',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegAddEntityComponent implements OnInit {
 
-  constructor() { }
+  obj = {
+    name: '',
+    type: '',
+  };
+
+  constructor(
+    private http: HttpClient,
+  ) { }
 
   ngOnInit(): void {
   }
 
+  addEntity(obj): void {
+    this.http.post('/api/data/entity', obj).subscribe(val => {
+      console.log('GOT RESULT', val);
+    });
+  }
 }
