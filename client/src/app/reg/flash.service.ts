@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {NavigationEnd, Router} from "@angular/router";
-import {filter} from "rxjs/operators";
+import {NavigationEnd, Router} from '@angular/router';
+import {filter} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class FlashService {
     // Services don't use ngOnInit(), just a constructor.
     router.events.pipe(
       filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
+    ).subscribe((_: NavigationEnd) => {
 
       // Send messages to display.
       // console.log('FlashService: Router event', event);
