@@ -49,15 +49,22 @@ def ajax_item(request):
 
     method = request.method
     if method == 'GET':
-        # Maybe load child objects.
+        # Maybe load children.
         includeChildren = request.params.get('includeChildren', '')
         if includeChildren:
-            # Load children.
             obj.children = request.dbsession.query(entity_cl).filter_by(parent_id=entity_id).all()
+
+        # Maybe load parent.
+        includeParent = request.params.get('includeParent', '')
+        if includeParent and obj.parent_id:
+            obj.parent = request.dbsession.query(entity_cl).filter_by(id=obj.parent_id).one()
+
     elif method == 'POST':
         obj.update_fields(request)
+
     elif method == 'DELETE':
         request.dbsession.delete(obj)
+
     else:
         raise Exception('Unknown method: {}'.format(method))
 
