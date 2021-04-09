@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Subject} from 'rxjs';
 import {FieldExtractChoice, FieldExtractStrategy, FieldType, strategies} from "../../fieldproc";
@@ -8,7 +8,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 @Component({
   selector: 'app-extract-field',
   templateUrl: './extract-field.component.html',
-  styleUrls: ['./extract-field.component.scss']
+  styleUrls: ['./extract-field.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExtractFieldComponent implements OnInit {
 
@@ -28,7 +29,8 @@ export class ExtractFieldComponent implements OnInit {
 
   constructor(
     // Easiest way to pick up reference to container.
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    private cd: ChangeDetectorRef,
   ) {
   }
 
@@ -55,13 +57,17 @@ export class ExtractFieldComponent implements OnInit {
 
     this.form.valueChanges.subscribe(currentParams => {
       console.log('value changes', currentParams);
-      this.choices.forEach(choice => {
+      this.choices = this.choices.map(choice => {
         const computedOutput = this.columns.map(col => {
           return choice.strategy.applyFunc(col, currentParams);
         });
         choice.computedOutput = computedOutput;
-        console.log('new computed output:', computedOutput);
+        // console.log('new computed output:', computedOutput);
+        return choice;
       });
+
+      // I don't know why this was needed, but it was.
+      this.cd.detectChanges();
     });
   }
 
