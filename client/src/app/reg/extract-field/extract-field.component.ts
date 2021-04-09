@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Subject} from 'rxjs';
 import {FieldExtractChoice, FieldExtractStrategy, FieldType, strategies} from "../../fieldproc";
+import {FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -20,6 +21,7 @@ export class ExtractFieldComponent implements OnInit {
 
   // Working data:
   choices: FieldExtractChoice[];
+  form: FormGroup;
 
   // Outputs to parent:
   public onClose: Subject<boolean> = new Subject<boolean>();
@@ -32,12 +34,27 @@ export class ExtractFieldComponent implements OnInit {
 
   ngOnInit(): void {
     // Compute using all strategies.
+    this.form = new FormGroup({});
+    const formValues = {};
     this.choices = strategies.map((strategy: FieldExtractStrategy) => {
       const computedParams = strategy.extractFunc(this.fullText, this.selectedText);
+
+      // Assume all names are unique across strategies.
+      strategy.params.forEach(param => {
+        this.form.addControl(param.name, new FormControl());
+        formValues[param.name] = computedParams[param.name];
+      });
+
       const computedOutput = this.columns.map(col => {
         return strategy.applyFunc(col, computedParams);
       });
       return {strategy, computedParams, computedOutput};
+    });
+
+    this.form.patchValue(formValues);
+
+    this.form.valueChanges.subscribe(val => {
+      console.log('value changes', val);
     });
   }
 

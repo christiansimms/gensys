@@ -30,7 +30,7 @@ export class RegImportComponent implements OnInit, OnDestroy {
   private handleSelectionchange = (): void => {
     const selection = document.getSelection();
     const selectedText = selection.toString();
-    console.log('handleSelectionchange', selectedText, selection);
+    // console.log('handleSelectionchange', selectedText, selection);
 
     // If the new selection is empty (for example, the user just clicked somewhere
     // in the document), then there's no new selection event to emit.
@@ -40,10 +40,10 @@ export class RegImportComponent implements OnInit, OnDestroy {
 
     const rangeSel = selection.getRangeAt(0);
     const rangeContainer = this.getRangeContainer(rangeSel);
-    console.log('Got container:', rangeContainer);
+    // console.log('Got container:', rangeContainer);
 
     const indexes = rangeContainer.getAttribute('data-row-col');
-    console.log('Indexes: ', indexes);
+    // console.log('Indexes: ', indexes);
 
     if (indexes) {
       const [rowIndex, colIndex] = smartSplit(indexes, '-');
@@ -82,7 +82,7 @@ export class RegImportComponent implements OnInit, OnDestroy {
         fromEvent(document, 'selectionchange').pipe(
           debounceTime(1000),
         ).subscribe(ev => {
-          console.log('Event!', ev);
+          // console.log('Event!', ev);
           this.handleSelectionchange();
         });
       }
@@ -90,7 +90,7 @@ export class RegImportComponent implements OnInit, OnDestroy {
   }
 
   public openModalWithComponent(fullText: string, selectedText: string, columns: string[]): void {
-    console.log('opening modal');
+    // console.log('opening modal');
     const init: ModalOptions<ExtractFieldComponent> = {
       initialState: {
         // Set inputs.
@@ -102,7 +102,7 @@ export class RegImportComponent implements OnInit, OnDestroy {
     };
     this.bsModalRef = this.modalService.show(ExtractFieldComponent, init);
     this.bsModalRef.content.onClose.subscribe(result => {
-      console.log('Parent got result:', result);
+      // console.log('Parent got result:', result);
     });
   }
 

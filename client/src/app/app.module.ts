@@ -10,7 +10,7 @@ import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ExtractFieldComponent } from './reg/extract-field/extract-field.component';
 import {ModalModule} from 'ngx-bootstrap/modal';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegSheetComponent } from './reg/reg-sheet/reg-sheet.component';
 import { SheetComponent } from './sheet/sheet.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -41,6 +41,7 @@ import { RegAddChildEntityComponent } from './reg/reg-add-child-entity/reg-add-c
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AccordionModule.forRoot(),

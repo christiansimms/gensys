@@ -12,42 +12,44 @@
     Selected Text: {{selectedText}}
   </p>
 
-  <div class="row">
-    <div class="col-md-4" *ngFor="let choice of choices">
-      <div class="card">
-        <div class="card-header">
-          {{choice.strategy.name}}
-        </div>
-        <div class="card-body">
-          Parameters:
-          <div *ngFor="let param of choice.strategy.params">
-            <div [ngSwitch]="param.type">
-              {{param.name}}:
-              <input
-                *ngSwitchCase="FieldType.string"
-                type="text"
-                [(ngModel)]="choice.computedParams[param.name]"
-              >
-              <input
-                *ngSwitchCase="FieldType.number"
-                type="number"
-                [(ngModel)]="choice.computedParams[param.name]"
-              >
-              <input
-                *ngSwitchCase="FieldType.regex"
-                type="text"
-                [(ngModel)]="choice.computedParams[param.name]"
-              >
-            </div>
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let choice of choices">
+        <div class="card">
+          <div class="card-header">
+            {{choice.strategy.name}}
           </div>
-          Sample Output:
-          <div *ngFor="let out of choice.computedOutput">
-            {{out}}
+          <div class="card-body">
+            Parameters:
+            <div *ngFor="let param of choice.strategy.params">
+              <div [ngSwitch]="param.type">
+                {{param.name}}:
+                <input
+                  *ngSwitchCase="FieldType.string"
+                  type="text"
+                  [formControlName]="param.name"
+                >
+                <input
+                  *ngSwitchCase="FieldType.number"
+                  type="number"
+                  [formControlName]="param.name"
+                >
+                <input
+                  *ngSwitchCase="FieldType.regex"
+                  type="text"
+                  [formControlName]="param.name"
+                >
+              </div>
+            </div>
+            Sample Output:
+            <div *ngFor="let out of choice.computedOutput">
+              {{out}}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 
 </div>
 <div class="modal-footer">
