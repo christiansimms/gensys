@@ -53,8 +53,15 @@ export class ExtractFieldComponent implements OnInit {
 
     this.form.patchValue(formValues);
 
-    this.form.valueChanges.subscribe(val => {
-      console.log('value changes', val);
+    this.form.valueChanges.subscribe(currentParams => {
+      console.log('value changes', currentParams);
+      this.choices.forEach(choice => {
+        const computedOutput = this.columns.map(col => {
+          return choice.strategy.applyFunc(col, currentParams);
+        });
+        choice.computedOutput = computedOutput;
+        console.log('new computed output:', computedOutput);
+      });
     });
   }
 
