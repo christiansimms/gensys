@@ -12,7 +12,8 @@
   <accordion>
     <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
       <div class="overflow-auto bg-light">
-        <app-pre-json [data]="rawData"></app-pre-json>
+        <!-- Raw data is always text, not json, so don't use app-prep-json. -->
+        <pre>{{rawData}}</pre>
       </div>
     </accordion-group>
 
