@@ -1,11 +1,10 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {FieldExtractChoice, FieldExtractStrategy, strategies} from "../../fieldproc";
-import {FormControl, FormGroup} from "@angular/forms";
-import {Subject} from "rxjs";
-import {BsModalRef} from "ngx-bootstrap/modal";
-import {unixTimeFormat} from "../../utils";
-import {HttpClient} from "@angular/common/http";
-import {FlashService} from "../../reg/flash.service";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {BsModalRef} from 'ngx-bootstrap/modal';
+import {unixTimeFormat} from '../../utils';
+import {HttpClient} from '@angular/common/http';
+import {FlashService} from '../../reg/flash.service';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-save-file-popup',
@@ -48,7 +47,7 @@ export class SaveFilePopupComponent implements OnInit {
       type: 'file',
       fields: this.data,
     };
-    this.http.post('/api/data/entity', obj).subscribe(val => {
+    this.http.post('/api/data/entity', obj).subscribe(_ => {
       this.flashService.tellSuccessImmediately('File saved');
     });
 
