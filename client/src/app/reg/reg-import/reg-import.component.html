@@ -12,7 +12,7 @@
   <accordion>
     <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
       <div class="overflow-auto bg-light">
-        <pre>{{rawData | json}}</pre>
+        <app-pre-json [data]="rawData"></app-pre-json>
       </div>
     </accordion-group>
 
@@ -36,8 +36,7 @@
         </table>
       </div>
       <div class="overflow-auto bg-light" *ngIf="outputs[i]._type !== 'jsonTable'">
-        <!--    {{output}}-->
-        <pre>{{outputs[i] | json}}</pre>
+        <app-pre-json [data]="outputs[i]"></app-pre-json>
       </div>
     </accordion-group>
 

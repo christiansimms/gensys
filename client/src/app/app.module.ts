@@ -20,6 +20,7 @@ import { FlashComponent } from './reg/flash/flash.component';
 import { RegEntityComponent } from './reg/reg-entity/reg-entity.component';
 import { RegViewEntityComponent } from './reg/reg-view-entity/reg-view-entity.component';
 import { RegAddChildEntityComponent } from './reg/reg-add-child-entity/reg-add-child-entity.component';
+import { PreJsonComponent } from './comp/pre-json/pre-json.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { RegAddChildEntityComponent } from './reg/reg-add-child-entity/reg-add-c
     FlashComponent,
     RegEntityComponent,
     RegViewEntityComponent,
-    RegAddChildEntityComponent
+    RegAddChildEntityComponent,
+    PreJsonComponent
   ],
   imports: [
     BrowserModule,
