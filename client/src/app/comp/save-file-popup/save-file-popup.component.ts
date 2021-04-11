@@ -4,6 +4,8 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Subject} from "rxjs";
 import {BsModalRef} from "ngx-bootstrap/modal";
 import {unixTimeFormat} from "../../utils";
+import {HttpClient} from "@angular/common/http";
+import {FlashService} from "../../reg/flash.service";
 
 @Component({
   selector: 'app-save-file-popup',
@@ -24,7 +26,8 @@ export class SaveFilePopupComponent implements OnInit {
   constructor(
     // Easiest way to pick up reference to container.
     public bsModalRef: BsModalRef,
-    private cd: ChangeDetectorRef,
+    private http: HttpClient,
+    private flashService: FlashService,
   ) {
   }
 
@@ -39,7 +42,15 @@ export class SaveFilePopupComponent implements OnInit {
 
   public onConfirm(): void {
     // Actually save the file.
-    alert(this.form.value.fileName);
+    const fileName: string = this.form.value.fileName;
+    const obj = {
+      name: fileName,
+      type: 'file',
+      fields: this.data,
+    };
+    this.http.post('/api/data/entity', obj).subscribe(val => {
+      this.flashService.tellSuccessImmediately('File saved');
+    });
 
     this.onClose.next(true);
     this.bsModalRef.hide();

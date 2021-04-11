@@ -43,7 +43,7 @@ export class FlashService {
     }
   }
 
-  tellSuccessImmediately(message, url?): void {
+  tellSuccessImmediately(message): void {
     this.collectMessages.pop();
     this.displayMessages.pop();
     this.displayMessages.push(message);
