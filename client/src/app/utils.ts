@@ -129,7 +129,7 @@ function escapeRegExp(val): string {
 function regexForCat(cat: string): string {
   switch (cat) {
     case 'alpha':
-        return '[a-zA-Z]';
+      return '[a-zA-Z]';
     case 'num':
       return '\\d';
     case 'space':
@@ -175,4 +175,18 @@ export function fixedSizeRegexFromStr(val: string): string {
     catCount = 0;
   }
   return out.join('');
+}
+
+// Snagged from: https://stackoverflow.com/questions/19485353/function-to-convert-timestamp-to-human-date-in-javascript/19485922
+export function unixTimeFormat(includeMillis: boolean = false): string {
+
+  const u = new Date();
+
+  return u.getUTCFullYear() +
+    '-' + ('0' + u.getUTCMonth()).slice(-2) +
+    '-' + ('0' + u.getUTCDate()).slice(-2) +
+    ' ' + ('0' + u.getUTCHours()).slice(-2) +
+    ':' + ('0' + u.getUTCMinutes()).slice(-2) +
+    ':' + ('0' + u.getUTCSeconds()).slice(-2) +
+    (includeMillis ? ('.' + (u.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5)) : '');
 }

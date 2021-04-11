@@ -3,6 +3,7 @@ import {FieldExtractChoice, FieldExtractStrategy, strategies} from "../../fieldp
 import {FormControl, FormGroup} from "@angular/forms";
 import {Subject} from "rxjs";
 import {BsModalRef} from "ngx-bootstrap/modal";
+import {unixTimeFormat} from "../../utils";
 
 @Component({
   selector: 'app-save-file-popup',
@@ -33,10 +34,13 @@ export class SaveFilePopupComponent implements OnInit {
       fileName: new FormControl(),
     });
 
-    this.form.patchValue({fileName: 'TODO'});
+    this.form.patchValue({fileName: unixTimeFormat()});
   }
 
   public onConfirm(): void {
+    // Actually save the file.
+    alert(this.form.value.fileName);
+
     this.onClose.next(true);
     this.bsModalRef.hide();
   }
