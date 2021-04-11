@@ -6,6 +6,10 @@ help:
 	@echo "Then: m bash"
 	@echo "Then: ./run.sh"
 
+.PHONY: client
+client:
+	cd client && npm start
+
 # We run docker build inside subdirectory to avoid including too many files from app.
 # Therefore, we have to individually copy files needed by docker build.
 # The whole app is shared as a link, so this is for other things.
