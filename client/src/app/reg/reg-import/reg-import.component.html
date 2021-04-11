@@ -11,6 +11,9 @@
 
   <accordion>
     <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
+      <button type="button" class="btn btn-outline-primary float-right" (click)="onSave(rawData)">Save</button>
+      <h2>Raw Data</h2>
+
       <div class="overflow-auto bg-light">
         <!-- Raw data is always text, not json, so don't use app-prep-json. -->
         <pre>{{rawData}}</pre>
@@ -19,6 +22,7 @@
 
     <accordion-group *ngFor="let proc of procs; let i=index" heading="Step {{i}}: {{proc}}" [isOpen]="(i+1) === procs.length">
       <h2>Step {{i}}: {{proc}}</h2>
+      <button type="button" class="btn btn-outline-primary float-right" (click)="onSave(outputs[i])">Save</button>
 
       <!-- h2>Output</h2 -->
       <div *ngIf="outputs[i]?._type === 'jsonTable'">

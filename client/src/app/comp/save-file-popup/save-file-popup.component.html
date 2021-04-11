@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Save File</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="onCancel()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- p>
+    To save: {{data}}
+  </p -->
+
+  <form [formGroup]="form">
+    <div class="form-group row">
+      <label for="fileName" class="col-sm-2 col-form-label text-right">File Name</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="fileName" formControlName="fileName">
+      </div>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="onConfirm()">Save</button>
+  <button type="button" class="btn btn-default" (click)="onCancel()">Cancel</button>
+</div>

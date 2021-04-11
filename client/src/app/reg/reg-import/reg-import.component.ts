@@ -6,6 +6,7 @@ import {ExtractFieldComponent} from '../extract-field/extract-field.component';
 import {range, smartSplit} from '../../utils';
 import {fromEvent} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {SaveFilePopupComponent} from "../../comp/save-file-popup/save-file-popup.component";
 
 @Component({
   selector: 'app-reg-import',
@@ -15,6 +16,7 @@ import {debounceTime} from 'rxjs/operators';
 export class RegImportComponent implements OnInit, OnDestroy {
 
   bsModalRef: BsModalRef<ExtractFieldComponent>;
+  saveFileModalRef: BsModalRef<SaveFilePopupComponent>;
 
   procs = [];
   outputs;
@@ -90,7 +92,6 @@ export class RegImportComponent implements OnInit, OnDestroy {
   }
 
   public openModalWithComponent(fullText: string, selectedText: string, columns: string[]): void {
-    // console.log('opening modal');
     const init: ModalOptions<ExtractFieldComponent> = {
       initialState: {
         // Set inputs.
@@ -144,5 +145,19 @@ export class RegImportComponent implements OnInit, OnDestroy {
     this.resetSteps();
     this.procs = ['splitLines', 'splitTabs', 'displayAsTable'];
     this.runAllSteps();
+  }
+
+  onSave(data: string): any {
+    const init: ModalOptions<SaveFilePopupComponent> = {
+      initialState: {
+        // Set inputs.
+        data,
+      },
+      class: 'modal-lg',
+    };
+    this.saveFileModalRef = this.modalService.show(SaveFilePopupComponent, init);
+    this.saveFileModalRef.content.onClose.subscribe(result => {
+      // console.log('Parent got result:', result);
+    });
   }
 }
