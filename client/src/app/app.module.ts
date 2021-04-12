@@ -22,6 +22,7 @@ import { RegViewEntityComponent } from './reg/reg-view-entity/reg-view-entity.co
 import { RegAddChildEntityComponent } from './reg/reg-add-child-entity/reg-add-child-entity.component';
 import { PreJsonComponent } from './comp/pre-json/pre-json.component';
 import { SaveFilePopupComponent } from './comp/save-file-popup/save-file-popup.component';
+import { DisplayDataComponent } from './comp/display-data/display-data.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { SaveFilePopupComponent } from './comp/save-file-popup/save-file-popup.c
     RegViewEntityComponent,
     RegAddChildEntityComponent,
     PreJsonComponent,
-    SaveFilePopupComponent
+    SaveFilePopupComponent,
+    DisplayDataComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,8 @@
   <div><strong>Name:</strong> {{row.name}}</div>
   <div><strong>Type:</strong> {{row.type}}</div>
   <br/>
+  <div><app-display-data [data]="row.fields"></app-display-data></div>
+  <br/>
 
   <div *ngIf="row?.children.length > 0">
     <h2>Children</h2>
