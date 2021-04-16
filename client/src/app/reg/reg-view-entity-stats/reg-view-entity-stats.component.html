@@ -1,0 +1,31 @@
+<div *ngIf="dataOb | async; let row">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/reg/entity">Entities</a></li>
+      <li class="breadcrumb-item"><a routerLink="/reg/entity/{{row.id}}">Entity</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Stats</li>
+    </ol>
+  </nav>
+
+  <h1>Entity Stats</h1>
+
+  <p>
+    Actions:
+  </p>
+
+  <div *ngIf="row.parent">
+    Parent: <a routerLink="/reg/entity/{{row.parent.id}}">{{row.parent.name}} {{row.parent.type}}</a>
+  </div>
+
+  <div><strong>Id:</strong> {{row.id}}</div>
+  <div><strong>Name:</strong> {{row.name}}</div>
+  <div><strong>Type:</strong> {{row.type}}</div>
+
+  <div echarts [options]="chartOption" class="demo-chart"></div>
+
+<!--  <br/>-->
+<!--  <div>-->
+<!--    <app-display-data [data]="row.fields"></app-display-data>-->
+<!--  </div>-->
+</div>

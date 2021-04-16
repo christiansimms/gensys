@@ -24,6 +24,11 @@ import { PreJsonComponent } from './comp/pre-json/pre-json.component';
 import { SaveFilePopupComponent } from './comp/save-file-popup/save-file-popup.component';
 import { DisplayDataComponent } from './comp/display-data/display-data.component';
 
+import { NgxEchartsModule } from 'ngx-echarts';
+import * as echarts from 'echarts';
+import { RegViewEntityStatsComponent } from './reg/reg-view-entity-stats/reg-view-entity-stats.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +46,8 @@ import { DisplayDataComponent } from './comp/display-data/display-data.component
     RegAddChildEntityComponent,
     PreJsonComponent,
     SaveFilePopupComponent,
-    DisplayDataComponent
+    DisplayDataComponent,
+    RegViewEntityStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +57,10 @@ import { DisplayDataComponent } from './comp/display-data/display-data.component
     AppRoutingModule,
     BrowserAnimationsModule,
     AccordionModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    NgxEchartsModule.forRoot({
+      echarts,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

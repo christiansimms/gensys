@@ -20,8 +20,10 @@
     "@angular/platform-browser-dynamic": "~11.2.6",
     "@angular/router": "~11.2.6",
     "bootstrap": "^4.6.0",
+    "echarts": "^5.0.2",
     "jspreadsheet-ce": "^4.7.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-echarts": "^6.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
