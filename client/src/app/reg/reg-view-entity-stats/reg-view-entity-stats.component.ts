@@ -61,24 +61,43 @@ export class RegViewEntityStatsComponent implements OnInit {
           const cats = sortedCounts.map(entry => entry[0]);
           const counts = sortedCounts.map(entry => entry[1]);
 
-          this.chartOption = {
+          this.chartOption = <any>{
             xAxis: {
               type: 'category',
               data: cats,
+              axisLabel: {
+                inside: true,
+                textStyle: {
+                  color: '#fff'
+                }
+              },
             },
             yAxis: {
               type: 'value'
             },
+            dataZoom: [
+              {
+                type: 'inside'
+              }
+            ],
             series: [{
               data: counts,
               type: 'bar',
-              // showBackground: false,
-              // backgroundStyle: {
-              //   color: 'rgba(180, 180, 180, 0.2)'
-              // }
+              label: {
+                show: true,
+                position: 'insideBottom',
+                distance: 15,
+                align: 'left',
+                verticalAlign: 'middle',
+                rotate: 90,
+                formatter: '{b}',
+                fontSize: 14,
+                rich: {
+                  name: {}
+                }
+              },
             }]
           };
-
         }
       });
     });
