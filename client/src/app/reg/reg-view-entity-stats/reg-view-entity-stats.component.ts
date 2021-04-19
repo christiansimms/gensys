@@ -80,6 +80,12 @@ export class RegViewEntityStatsComponent implements OnInit {
                 type: 'inside'
               }
             ],
+            tooltip: {
+              trigger: 'axis',
+              axisPointer: {
+                type: 'shadow'
+              }
+            },
             series: [{
               data: counts,
               type: 'bar',
