@@ -90,7 +90,7 @@ export class RegViewEntityStatsComponent implements OnInit {
               data: counts,
               type: 'bar',
               label: {
-                show: true,
+                show: false,  // uncomment to see them, but they take up too much space
                 position: 'insideBottom',
                 distance: 15,
                 align: 'left',

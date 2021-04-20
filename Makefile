@@ -19,7 +19,9 @@ build:
 	rm server/dock/requirements.txt server/dock/envvars_docker server/dock/development.ini
 
 stop:
-	-docker ps -a -q | xargs docker rm -f
+	#-docker ps -a -q | xargs docker rm -f
+	docker ps -a -q  --filter ancestor=postgres | xargs docker rm -f
+	docker ps -a -q  --filter ancestor=gensysserver | xargs docker rm -f
 
 rundb:
 	docker run -d --name psqlserver -v postgres_data:/var/lib/postgresql/data/ -e POSTGRES_PASSWORD=Password1 postgres
