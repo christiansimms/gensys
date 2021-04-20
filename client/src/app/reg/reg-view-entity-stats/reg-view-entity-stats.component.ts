@@ -14,24 +14,7 @@ export class RegViewEntityStatsComponent implements OnInit {
 
   dataOb: Observable<any>;
 
-  chartOption: EChartsOption;
-  // chartOption: EChartsOption = {
-  //   xAxis: {
-  //     type: 'category',
-  //     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-  //   },
-  //   yAxis: {
-  //     type: 'value'
-  //   },
-  //   series: [{
-  //     data: [120, 200, 150, 80, 70, 110, 130],
-  //     type: 'bar',
-  //     showBackground: true,
-  //     backgroundStyle: {
-  //       color: 'rgba(180, 180, 180, 0.2)'
-  //     }
-  //   }]
-  // };
+  chartOptions: EChartsOption[];
 
   constructor(
     public route: ActivatedRoute,
@@ -48,62 +31,68 @@ export class RegViewEntityStatsComponent implements OnInit {
         if (entity.fields && entity.fields._type === 'jsonTable') {
           // It's a table.
           const table: any[][] = entity.fields.table;
+          this.chartOptions = [];
 
-          // Start w/just 1 column.
-          const counter = new Counter();
-          table.slice(1).forEach(row => {
-            row.forEach(col => {
-              counter.addToCount(col);
+          // Loop through each column.
+          const firstRow = table[0];
+          firstRow.forEach((col, colIndex) => {
+
+            const counter = new Counter();
+            table.slice(1).forEach(row => {
+              const colValue = row[colIndex];
+              counter.addToCount(colValue);
             });
-          });
-          const sortedCounts = counter.sortedCounts();
-          console.log('DONE:', sortedCounts);
-          const cats = sortedCounts.map(entry => entry[0]);
-          const counts = sortedCounts.map(entry => entry[1]);
+            const sortedCounts = counter.sortedCounts();
+            console.log('DONE:', sortedCounts);
+            const cats = sortedCounts.map(entry => entry[0]);
+            const counts = sortedCounts.map(entry => entry[1]);
 
-          this.chartOption = <any>{
-            xAxis: {
-              type: 'category',
-              data: cats,
-              axisLabel: {
-                inside: true,
-                textStyle: {
-                  color: '#fff'
+            const chartOption: EChartsOption = <any>{
+              xAxis: {
+                type: 'category',
+                data: cats,
+                axisLabel: {
+                  inside: true,
+                  textStyle: {
+                    color: '#fff'
+                  }
+                },
+              },
+              yAxis: {
+                type: 'value'
+              },
+              dataZoom: [
+                {
+                  type: 'inside'
+                }
+              ],
+              tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                  type: 'shadow'
                 }
               },
-            },
-            yAxis: {
-              type: 'value'
-            },
-            dataZoom: [
-              {
-                type: 'inside'
-              }
-            ],
-            tooltip: {
-              trigger: 'axis',
-              axisPointer: {
-                type: 'shadow'
-              }
-            },
-            series: [{
-              data: counts,
-              type: 'bar',
-              label: {
-                show: false,  // uncomment to see them, but they take up too much space
-                position: 'insideBottom',
-                distance: 15,
-                align: 'left',
-                verticalAlign: 'middle',
-                rotate: 90,
-                formatter: '{b}',
-                fontSize: 14,
-                rich: {
-                  name: {}
-                }
-              },
-            }]
-          };
+              series: [{
+                data: counts,
+                type: 'bar',
+                label: {
+                  show: false,  // uncomment to see them, but they take up too much space
+                  position: 'insideBottom',
+                  distance: 15,
+                  align: 'left',
+                  verticalAlign: 'middle',
+                  rotate: 90,
+                  formatter: '{b}',
+                  fontSize: 14,
+                  rich: {
+                    name: {}
+                  }
+                },
+              }]
+            };
+            this.chartOptions.push(chartOption);
+          });
+
         }
       });
     });

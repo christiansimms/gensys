@@ -1,9 +1,9 @@
-<div *ngIf="dataOb | async; let row">
+<div *ngIf="dataOb | async; let data">
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/reg/entity">Entities</a></li>
-      <li class="breadcrumb-item"><a routerLink="/reg/entity/{{row.id}}">Entity</a></li>
+      <li class="breadcrumb-item"><a routerLink="/reg/entity/{{data.id}}">Entity</a></li>
       <li class="breadcrumb-item active" aria-current="page">Stats</li>
     </ol>
   </nav>
@@ -14,18 +14,49 @@
     Actions:
   </p>
 
-  <div *ngIf="row.parent">
-    Parent: <a routerLink="/reg/entity/{{row.parent.id}}">{{row.parent.name}} {{row.parent.type}}</a>
+  <div *ngIf="data.parent">
+    Parent: <a routerLink="/reg/entity/{{data.parent.id}}">{{data.parent.name}} {{data.parent.type}}</a>
   </div>
 
-  <div><strong>Id:</strong> {{row.id}}</div>
-  <div><strong>Name:</strong> {{row.name}}</div>
-  <div><strong>Type:</strong> {{row.type}}</div>
+  <div><strong>Id:</strong> {{data.id}}</div>
+  <div><strong>Name:</strong> {{data.name}}</div>
+  <div><strong>Type:</strong> {{data.type}}</div>
 
-  <div echarts [options]="chartOption"></div>
+  <!-- div echarts [options]="chartOption"></div -->
 
-<!--  <br/>-->
-<!--  <div>-->
-<!--    <app-display-data [data]="row.fields"></app-display-data>-->
-<!--  </div>-->
+  <div *ngIf="data?.fields; let fields">
+    <div *ngIf="fields?._type === 'jsonTable'">
+      <h3>Data in Table Form</h3>
+      <table class="table table-bordered table-striped table-sm" *ngIf="fields.table; let rows" style="table-layout: fixed">
+        <thead>
+        <tr>
+          <th *ngFor="let header of rows[0]" style="width: 200px">{{header}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td *ngFor="let header of rows[0]; let colIndex=index">
+            <div echarts [options]="chartOptions[colIndex]"></div>
+          </td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr *ngFor="let row of rows.slice(1); let rowIndex=index">
+          <td *ngFor="let col of row; let colIndex=index" [attr.data-row-col]="rowIndex + '-' + colIndex">{{col}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="overflow-auto bg-light" *ngIf="fields?._type !== 'jsonTable'">
+      <br/><br/>
+      This is not a table, so cannot display stats.
+      <app-display-data [data]="fields"></app-display-data>
+    </div>
+  </div>
+
+
+  <!--  <br/>-->
+  <!--  <div>-->
+  <!--    <app-display-data [data]="row.fields"></app-display-data>-->
+  <!--  </div>-->
 </div>
