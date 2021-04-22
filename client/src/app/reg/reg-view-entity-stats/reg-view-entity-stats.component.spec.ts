@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegViewEntityStatsComponent } from './reg-view-entity-stats.component';
 
-describe('RegViewEntityStatsComponent', () => {
+xdescribe('RegViewEntityStatsComponent', () => {
   let component: RegViewEntityStatsComponent;
   let fixture: ComponentFixture<RegViewEntityStatsComponent>;
 

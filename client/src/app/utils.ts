@@ -104,8 +104,13 @@ function isLetter(c: string): boolean {
   return c.toLowerCase() !== c.toUpperCase();
 }
 
-function isNumber(c: string): boolean {
+export function isNumber(c: string): boolean {
   return !isNaN(Number(c));
+}
+
+// Watch out, this returns true for any number, not just dates.
+export function isDate(c: string): boolean {
+  return !isNaN(Date.parse(c));
 }
 
 function getCharCat(letter: string): string {
