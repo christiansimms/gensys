@@ -41,6 +41,9 @@ run: stop build
 	@echo Now go to: http://0.0.0.0:6540
 	#docker logs -f gensysservertest
 
+.PHONY: server
+server: run
+
 deletevol:
 	-docker volume rm postgres_data
 
