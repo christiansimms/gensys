@@ -13,9 +13,5 @@ export class RegSheetComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-     this.http.get('/api/data/entity').subscribe(val => {
-       console.log('GOT RESULT', val);
-     });
   }
-
 }
