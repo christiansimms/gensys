@@ -1,5 +1,6 @@
 from pyramid.response import Response
 from pyramid.view import view_config
+from sqlalchemy import select
 
 from sqlalchemy.exc import DBAPIError
 from ..models import mymodel
@@ -14,16 +15,24 @@ def ajax_root(request):
 
     method = request.method
     if method == 'GET':
-        # Generic handling.
+        # Get ready to do query.
         entity_cl = getattr(mymodel, entity_name)
-        q = request.dbsession.query(entity_cl)
+        _select = request.params.get('_select', '')
+        if _select:
+            colNames = _select.split(',')
+            cols = [getattr(entity_cl, colName) for colName in colNames]
+            s = select(*cols)
+            objs = [dict(zip(colNames, row)) for row in request.dbsession.execute(s)]  # get rid of iterator
+        else:
+            # Generic handling.
+            q = request.dbsession.query(entity_cl)
 
-        # Add any filters.
-        for (name, value) in request.params.items():
-            clattr = getattr(entity_cl, name)
-            q = q.filter(clattr == value)
+            # Add any filters.
+            for (name, value) in request.params.items():
+                clattr = getattr(entity_cl, name)
+                q = q.filter(clattr == value)
 
-        objs = q.all()
+            objs = q.all()
 
         return objs
     elif method == 'POST':

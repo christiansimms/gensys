@@ -18,7 +18,7 @@ export class RegEntityComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.dataOb = this.http.get<any[]>('/api/data/entity');
+    this.dataOb = this.http.get<any[]>('/api/data/entity?_select=id,parent_id,name,type');
   }
 
   deleteEntity(row: any): void {
