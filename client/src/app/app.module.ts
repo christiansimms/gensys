@@ -27,6 +27,7 @@ import { DisplayDataComponent } from './comp/display-data/display-data.component
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
 import { RegViewEntityStatsComponent } from './reg/reg-view-entity-stats/reg-view-entity-stats.component';
+import { WorkComponent } from './reg/work/work.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RegViewEntityStatsComponent } from './reg/reg-view-entity-stats/reg-vie
     PreJsonComponent,
     SaveFilePopupComponent,
     DisplayDataComponent,
-    RegViewEntityStatsComponent
+    RegViewEntityStatsComponent,
+    WorkComponent
   ],
   imports: [
     BrowserModule,

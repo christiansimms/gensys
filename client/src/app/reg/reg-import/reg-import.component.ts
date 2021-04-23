@@ -6,7 +6,7 @@ import {ExtractFieldComponent} from '../extract-field/extract-field.component';
 import {range, smartSplit} from '../../utils';
 import {fromEvent} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import {SaveFilePopupComponent} from "../../comp/save-file-popup/save-file-popup.component";
+import {SaveFilePopupComponent} from '../../comp/save-file-popup/save-file-popup.component';
 
 @Component({
   selector: 'app-reg-import',
@@ -64,9 +64,9 @@ export class RegImportComponent implements OnInit, OnDestroy {
   }
 
   // I get the deepest Element node in the DOM tree that contains the entire range.
-  private getRangeContainer(range: Range): Element {
+  private getRangeContainer(rang: Range): Element {
 
-    let container = range.commonAncestorContainer;
+    let container = rang.commonAncestorContainer;
 
     // If the selected node is a Text node, climb up to an element node - in Internet
     // Explorer, the .contains() method only works with Element nodes.
@@ -83,7 +83,7 @@ export class RegImportComponent implements OnInit, OnDestroy {
         // document.addEventListener('selectionchange', this.handleSelectionchange, false);
         fromEvent(document, 'selectionchange').pipe(
           debounceTime(1000),
-        ).subscribe(ev => {
+        ).subscribe(_ => {
           // console.log('Event!', ev);
           this.handleSelectionchange();
         });

@@ -10,9 +10,11 @@
 <div *ngIf="dataOb | async; let row">
   <p>
     Actions:
-    <a routerLink="/reg/entity/{{row.id}}/add" class="btn btn-outline-primary">Add Child</a>
+    <a routerLink="/reg/entity/{{row.id}}/add">Add Child</a>
     &nbsp;&nbsp;
     <a routerLink="/reg/entity/{{row.id}}/stats">View Stats</a>
+    &nbsp;&nbsp;
+    <a routerLink="/reg/work" fragment="entity-{{row.id}}">Work on this</a>
   </p>
 
   <div *ngIf="row.parent">
