@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {concat, deepApply, dumbSplit, xml2json} from './utils';
+import {guessTable} from './common/dbschema';
 
 // Allowed commands.
 const commands = {
@@ -33,6 +34,10 @@ const nonRecursiveCommands = {
       _type: 'jsonTable',
       table: val,
     };
+  },
+
+  guessTable: (val: any) => {
+    return guessTable(val);
   }
 };
 

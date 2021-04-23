@@ -7,9 +7,9 @@
 
 <h1>Work on Entity</h1>
 <div *ngIf="dataOb | async; let row">
-  <p>
+  <!-- p>
     Actions:
-  </p>
+  </p -->
 
   <div *ngIf="row.parent">
     Parent: <a routerLink="/reg/entity/{{row.parent.id}}">{{row.parent.name}} {{row.parent.type}}</a>
@@ -19,6 +19,26 @@
   <div><strong>Name:</strong> {{row.name}}</div>
   <div><strong>Type:</strong> {{row.type}}</div>
   <br/>
-  <div><app-display-data [data]="row.fields"></app-display-data></div>
 
+  <accordion>
+    <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
+
+      <span *ngFor="let choice of textprocService.getProcs()">
+        <button class="btn btn-outline-primary" (click)="applyProc(choice)">{{choice}}</button>
+      </span>
+      <!-- button type="button" class="btn btn-outline-primary float-right" (click)="onSave(rawData)">Save</button -->
+      <div class="overflow-auto bg-light">
+        <div><app-display-data [data]="row.fields"></app-display-data></div>
+      </div>
+    </accordion-group>
+
+    <accordion-group *ngFor="let proc of procs; let i=index" heading="Step {{i}}: {{proc}}"
+                     [isOpen]="(i+1) === procs.length">
+      <h2>Step {{i}}: {{proc}}</h2>
+<!--      <button type="button" class="btn btn-outline-primary float-right" (click)="onSave(outputs[i])">Save</button>-->
+
+      <app-display-data [data]="outputs[i]"></app-display-data>
+    </accordion-group>
+
+  </accordion>
 </div>
