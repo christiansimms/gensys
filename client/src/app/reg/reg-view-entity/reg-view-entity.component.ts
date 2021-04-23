@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute, Params} from "@angular/router";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-reg-view-entity',
