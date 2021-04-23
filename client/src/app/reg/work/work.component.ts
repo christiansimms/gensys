@@ -36,13 +36,18 @@ export class WorkComponent implements OnInit {
     });
   }
 
-  applyProc(procName: string): void {
+  applyProc(procName: string, step: number): void {
+    if (step === 0) {
+      this.procs = [];
+    } else {
+      this.procs = this.procs.slice(0, step-1);
+    }
     this.procs.push(procName);
     this.runAllSteps();
   }
 
   runAllSteps(): void {
-    const input = this.initialData;
+    const input = this.initialData.fields.table;
     this.outputs = this.textprocService.runProcs(input, this.procs);
   }
 }

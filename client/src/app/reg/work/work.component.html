@@ -24,7 +24,7 @@
     <accordion-group heading="Raw Data" [isOpen]="procs?.length === 0">
 
       <span *ngFor="let choice of textprocService.getProcs()">
-        <button class="btn btn-outline-primary" (click)="applyProc(choice)">{{choice}}</button>
+        <button class="btn btn-outline-primary" (click)="applyProc(choice, 0)">{{choice}}</button>
       </span>
       <!-- button type="button" class="btn btn-outline-primary float-right" (click)="onSave(rawData)">Save</button -->
       <div class="overflow-auto bg-light">
