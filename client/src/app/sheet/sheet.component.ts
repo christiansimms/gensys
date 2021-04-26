@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 // import * as jexcel from 'jexcel';
 import jspreadsheet from 'jspreadsheet-ce';
 
@@ -11,14 +11,18 @@ export class SheetComponent implements OnInit, AfterViewInit {
 
   @ViewChild('spreadsheet') spreadsheet: ElementRef;
 
+  @Input()
+  data: any;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+    console.log('Input:', this.data);
     jspreadsheet(this.spreadsheet.nativeElement, {
-      data: [[]],
+      data: this.data,  //  || [[]],
       // columns: [
       //   { type: "dropdown", width: "100px", source: ["Y", "N"] },
       //   { type: "color", width: "100px", render: "square" }
