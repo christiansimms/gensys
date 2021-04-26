@@ -27,7 +27,8 @@ export class SheetComponent implements OnInit, AfterViewInit {
       //   { type: "dropdown", width: "100px", source: ["Y", "N"] },
       //   { type: "color", width: "100px", render: "square" }
       // ],
-      minDimensions: [10, 10]
+      minDimensions: [10, 10],
+      columnSorting: false,
     });
   }
 

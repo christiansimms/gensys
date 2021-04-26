@@ -33,7 +33,8 @@
             "styles": [
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/jspreadsheet-ce/dist/jspreadsheet.css"
+              "./node_modules/jspreadsheet-ce/dist/jspreadsheet.css",
+              "./node_modules/jsuites/dist/jsuites.css"
             ],
             "scripts": []
           },
