@@ -13,6 +13,7 @@ export class SheetComponent implements OnInit, AfterViewInit {
 
   @Input()
   data: any;
+  private sheet: jspreadsheet;
 
   constructor() { }
 
@@ -21,15 +22,21 @@ export class SheetComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     console.log('Input:', this.data);
-    jspreadsheet(this.spreadsheet.nativeElement, {
+    this.sheet = jspreadsheet(this.spreadsheet.nativeElement, {
       data: this.data,  //  || [[]],
       // columns: [
       //   { type: "dropdown", width: "100px", source: ["Y", "N"] },
       //   { type: "color", width: "100px", render: "square" }
       // ],
-      minDimensions: [10, 10],
+      // minDimensions: [10, 10],
       columnSorting: false,
+      onafterchanges: this.onafterchanges.bind(this),
     });
+  }
+
+  onafterchanges(el, records): void {
+    // Watch out, if user undos/redos, this is not called!
+    // console.log('onafterchanges:', records, this.sheet.getData());
   }
 
 }

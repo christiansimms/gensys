@@ -15,7 +15,7 @@
     <a routerLink="/reg/entity/{{row.id}}/stats">View Stats</a>
     <span *ngIf="row?.fields?._type === 'jsonTable'">
       &nbsp;&nbsp;
-      <a routerLink="/reg/entity/{{row.id}}/editTable" fragment="entity-{{row.id}}">Edit Table</a>
+      <a routerLink="/reg/entity/{{row.id}}/editTable">Edit Table</a>
     </span>
     &nbsp;&nbsp;
     <a routerLink="/reg/work" fragment="entity-{{row.id}}">Work on this</a>
