@@ -1,0 +1,15 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/reg/entity">Entities</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Edit Table</li>
+  </ol>
+</nav>
+
+<h1>Edit Table</h1>
+
+<div *ngIf="initialData as row">
+  <p><strong>Id:</strong> {{row.id}}</p>
+  <p><strong>Name:</strong> {{row.name}}</p>
+  <p><strong>Type:</strong> {{row.type}}</p>
+
+</div>
