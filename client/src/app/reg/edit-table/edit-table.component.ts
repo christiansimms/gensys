@@ -33,6 +33,7 @@ export class EditTableComponent implements OnInit {
   onSave(): void {
     this.http.post(`/api/data/entity/${this.initialData.id}`, this.initialData).subscribe(_ => {
       this.flashService.tellSuccessImmediately('File saved');
+      this.unsavedChanges = false;
     });
   }
 

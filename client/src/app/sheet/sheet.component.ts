@@ -15,7 +15,7 @@ export class SheetComponent implements OnInit, AfterViewInit {
   @Input() data: any;
   @Output() unsavedChanges = new EventEmitter<boolean>();
 
-  private testData: any;
+  private initialData: any;
   private sheet: jspreadsheet;
 
   constructor() { }
@@ -24,8 +24,8 @@ export class SheetComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('Input:', this.data);
-    this.testData = cloneDeep(this.data);
+    // console.log('Input:', this.data);
+    this.initialData = cloneDeep(this.data);
     this.sheet = jspreadsheet(this.spreadsheet.nativeElement, {
       data: this.data,  //  || [[]],
       // columns: [
@@ -35,18 +35,24 @@ export class SheetComponent implements OnInit, AfterViewInit {
       // minDimensions: [10, 10],
       columnSorting: false,
       onafterchanges: this.onafterchanges.bind(this),
+      onundo: this.onafterchanges.bind(this),
+      onredo: this.onafterchanges.bind(this),
+      ondeletecolumn: this.onafterchanges.bind(this),
+      ondeleterow: this.onafterchanges.bind(this),
+      oninsertcolumn: this.onafterchanges.bind(this),
+      oninsertrow: this.onafterchanges.bind(this),
     });
-    const sheetData = this.sheet.getData();
-    const equal = isEqual(sheetData, this.testData);
-    console.log('after setup:', sheetData, equal, sheetData === this.data);
+    // const sheetData = this.sheet.getData();
+    // const equal = isEqual(sheetData, this.initialData);
+    // console.log('after setup:', sheetData, equal, sheetData === this.data);
   }
 
   onafterchanges(el, records): void {
     // Watch out, if user undos/redos, this is not called!
     const sheetData = this.sheet.getData();
-    const equal = isEqual(sheetData, this.testData);
+    const equal = isEqual(sheetData, this.initialData);
     this.unsavedChanges.emit(!equal);
-    console.log('onafterchanges:', records, sheetData, equal);
+    // console.log('onafterchanges:', records, sheetData, equal);
   }
 
 }
