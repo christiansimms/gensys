@@ -22,6 +22,7 @@
     "bootstrap": "^4.6.0",
     "echarts": "^5.0.2",
     "jspreadsheet-ce": "^4.7.1",
+    "lodash": "^4.17.21",
     "ngx-bootstrap": "^6.2.0",
     "ngx-echarts": "^6.0.1",
     "rxjs": "~6.6.0",

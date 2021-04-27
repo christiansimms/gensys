@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {smartSplit} from '../../utils';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {FlashService} from '../flash.service';
 
 @Component({
   selector: 'app-edit-table',
@@ -15,6 +16,7 @@ export class EditTableComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private http: HttpClient,
+    private flashService: FlashService,
   ) { }
 
   ngOnInit(): void {
@@ -27,4 +29,9 @@ export class EditTableComponent implements OnInit {
     });
   }
 
+  onSave(): void {
+    this.http.post(`/api/data/entity/${this.initialData.id}`, this.initialData).subscribe(_ => {
+      this.flashService.tellSuccessImmediately('File saved');
+    });
+  }
 }
