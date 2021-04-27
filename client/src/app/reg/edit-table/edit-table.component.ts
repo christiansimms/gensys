@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {smartSplit} from '../../utils';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
@@ -18,7 +18,8 @@ export class EditTableComponent implements OnInit {
     public route: ActivatedRoute,
     private http: HttpClient,
     private flashService: FlashService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -26,6 +27,29 @@ export class EditTableComponent implements OnInit {
       const dataOb = this.http.get<any>(`/api/data/entity/${id}`);
       dataOb.subscribe(data => {
         this.initialData = data;
+
+        const queryParams = this.route.snapshot.queryParams;
+        if (queryParams.forceEditAsTable) {
+          console.log('forcing!');
+          if (!this.initialData.fields) {
+            this.initialData.fields = [
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+              [[], [], [], [], []],
+            ];
+          }
+          this.initialData.fields = {
+            _type: 'jsonTable',
+            table: this.initialData.fields,
+          };
+        }
       });
     });
   }
