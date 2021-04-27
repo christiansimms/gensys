@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 // import * as jexcel from 'jexcel';
 import jspreadsheet from 'jspreadsheet-ce';
 import {cloneDeep, isEqual} from 'lodash';
@@ -12,8 +12,9 @@ export class SheetComponent implements OnInit, AfterViewInit {
 
   @ViewChild('spreadsheet') spreadsheet: ElementRef;
 
-  @Input()
-  data: any;
+  @Input() data: any;
+  @Output() unsavedChanges = new EventEmitter<boolean>();
+
   private testData: any;
   private sheet: jspreadsheet;
 
@@ -44,6 +45,7 @@ export class SheetComponent implements OnInit, AfterViewInit {
     // Watch out, if user undos/redos, this is not called!
     const sheetData = this.sheet.getData();
     const equal = isEqual(sheetData, this.testData);
+    this.unsavedChanges.emit(!equal);
     console.log('onafterchanges:', records, sheetData, equal);
   }
 

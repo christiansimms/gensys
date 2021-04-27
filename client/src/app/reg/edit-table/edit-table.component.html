@@ -5,7 +5,7 @@
   </ol>
 </nav>
 
-<button type="button" class="btn btn-outline-primary float-right" (click)="onSave()">Save</button>
+<button type="button" class="btn btn-outline-primary float-right" (click)="onSave()" [disabled]="!unsavedChanges">Save</button>
 <h1>Edit Table</h1>
 
 <div *ngIf="initialData as row">
@@ -13,5 +13,5 @@
   <p><strong>Name:</strong> {{row.name}}</p>
   <p><strong>Type:</strong> {{row.type}}</p>
 
-  <app-sheet [data]="initialData.fields.table"></app-sheet>
+  <app-sheet [data]="initialData.fields.table" (unsavedChanges)="onUnsavedChanges($event)"></app-sheet>
 </div>

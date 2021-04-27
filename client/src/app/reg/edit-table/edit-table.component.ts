@@ -12,6 +12,7 @@ import {FlashService} from '../flash.service';
 export class EditTableComponent implements OnInit {
 
   initialData: any;
+  unsavedChanges = false;
 
   constructor(
     public route: ActivatedRoute,
@@ -33,5 +34,9 @@ export class EditTableComponent implements OnInit {
     this.http.post(`/api/data/entity/${this.initialData.id}`, this.initialData).subscribe(_ => {
       this.flashService.tellSuccessImmediately('File saved');
     });
+  }
+
+  onUnsavedChanges(unsavedChanges: boolean): void {
+    this.unsavedChanges = unsavedChanges;
   }
 }
