@@ -41,6 +41,13 @@ export class SheetComponent implements OnInit, AfterViewInit {
       ondeleterow: this.onafterchanges.bind(this),
       oninsertcolumn: this.onafterchanges.bind(this),
       oninsertrow: this.onafterchanges.bind(this),
+      // crs: not sure about this, but there are bugs in copy/paste
+      // onbeforepaste: (el, data) => {
+      //   console.log('onbeforepaste', data, data.replace(/"/g, '""'));
+      //   // return data.replace(/"/g, '&quot;');
+      //   // return data.replace(/"/g, '\\"');
+      //   return data.replace(/"/g, '""');
+      // },
     });
     // const sheetData = this.sheet.getData();
     // const equal = isEqual(sheetData, this.initialData);
