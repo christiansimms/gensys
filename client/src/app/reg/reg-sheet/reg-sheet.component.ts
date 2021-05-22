@@ -7,6 +7,10 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./reg-sheet.component.scss']
 })
 export class RegSheetComponent implements OnInit {
+  config = {
+    minDimensions: [10, 10],
+  };
+  data = [[]];
 
   constructor(
     private http: HttpClient,

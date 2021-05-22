@@ -12,6 +12,7 @@ export class SheetComponent implements OnInit, AfterViewInit {
 
   @ViewChild('spreadsheet') spreadsheet: ElementRef;
 
+  @Input() config: any;
   @Input() data: any;
   @Output() unsavedChanges = new EventEmitter<boolean>();
 
@@ -48,6 +49,7 @@ export class SheetComponent implements OnInit, AfterViewInit {
       //   // return data.replace(/"/g, '\\"');
       //   return data.replace(/"/g, '""');
       // },
+      ...this.config,
     });
     // const sheetData = this.sheet.getData();
     // const equal = isEqual(sheetData, this.initialData);
