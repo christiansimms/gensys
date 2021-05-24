@@ -25,6 +25,7 @@
     "lodash": "^4.17.21",
     "ngx-bootstrap": "^6.2.0",
     "ngx-echarts": "^6.0.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
