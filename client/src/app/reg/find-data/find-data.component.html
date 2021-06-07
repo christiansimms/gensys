@@ -1,1 +1,25 @@
-<p>find-data works!</p>
+<div *ngIf="dataOb | async; let row">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/reg/entity">Entities</a></li>
+      <li class="breadcrumb-item"><a routerLink="/reg/entity/{{dataOb.id}}">Entity</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Stats</li>
+    </ol>
+  </nav>
+
+  <h1>Find Data in Table</h1>
+  <p>
+    Actions:
+    <a routerLink="/reg/entity/{{row.id}}/add">Add Child</a>
+  </p>
+
+  <div><strong>Id:</strong> {{row.id}}</div>
+  <div><strong>Name:</strong> {{row.name}}</div>
+  <div><strong>Type:</strong> {{row.type}}</div>
+  <br/>
+  <div>
+    <app-display-data [data]="row.fields"></app-display-data>
+  </div>
+  <br/>
+
+</div>
