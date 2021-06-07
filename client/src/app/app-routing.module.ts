@@ -12,6 +12,7 @@ import {RegAddChildEntityComponent} from './reg/reg-add-child-entity/reg-add-chi
 import {RegViewEntityStatsComponent} from './reg/reg-view-entity-stats/reg-view-entity-stats.component';
 import {WorkComponent} from './reg/work/work.component';
 import {EditTableComponent} from './reg/edit-table/edit-table.component';
+import {FindDataComponent} from './reg/find-data/find-data.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'start', pathMatch: 'full'},
@@ -25,6 +26,7 @@ const routes: Routes = [
       {path: 'entity/:id/add', component: RegAddChildEntityComponent},
       {path: 'entity/:id/editTable', component: EditTableComponent},
       {path: 'entity/:id/stats', component: RegViewEntityStatsComponent},
+      {path: 'entity/:id/findData', component: FindDataComponent},
       {path: 'entity', component: RegEntityComponent},
       {path: 'import', component: RegImportComponent},
       {path: 'work', component: WorkComponent},

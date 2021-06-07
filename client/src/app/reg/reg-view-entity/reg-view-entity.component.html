@@ -16,6 +16,8 @@
     <span *ngIf="row?.fields?._type === 'jsonTable'">
       &nbsp;&nbsp;
       <a routerLink="/reg/entity/{{row.id}}/editTable">Edit Table</a>
+      &nbsp;&nbsp;
+      <a routerLink="/reg/entity/{{row.id}}/findData">Find Data</a>
     </span>
     <span *ngIf="row?.fields?._type !== 'jsonTable'">
       &nbsp;&nbsp;

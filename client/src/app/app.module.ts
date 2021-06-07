@@ -29,6 +29,7 @@ import * as echarts from 'echarts';
 import { RegViewEntityStatsComponent } from './reg/reg-view-entity-stats/reg-view-entity-stats.component';
 import { WorkComponent } from './reg/work/work.component';
 import { EditTableComponent } from './reg/edit-table/edit-table.component';
+import { FindDataComponent } from './reg/find-data/find-data.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { EditTableComponent } from './reg/edit-table/edit-table.component';
     DisplayDataComponent,
     RegViewEntityStatsComponent,
     WorkComponent,
-    EditTableComponent
+    EditTableComponent,
+    FindDataComponent
   ],
   imports: [
     BrowserModule,
