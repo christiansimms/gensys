@@ -22,6 +22,8 @@ def ajax_root(request):
             colNames = _select.split(',')
             cols = [getattr(entity_cl, colName) for colName in colNames]
             s = select(*cols)
+            # Add default ordering to guarantee consistent results.
+            s = s.order_by('id')
             objs = [dict(zip(colNames, row)) for row in request.dbsession.execute(s)]  # get rid of iterator
         else:
             # Generic handling.
@@ -32,6 +34,8 @@ def ajax_root(request):
                 clattr = getattr(entity_cl, name)
                 q = q.filter(clattr == value)
 
+            # Add default ordering to guarantee consistent results.
+            q = q.order_by('id')
             objs = q.all()
 
         return objs
