@@ -125,6 +125,26 @@ function getCharCat(letter: string): string {
   }
 }
 
+export enum CharCategory {
+  alpha = 'alpha',
+  num = 'num',
+  space = 'space',
+  other = 'other',
+}
+
+export function getCharCatLimited(letter: string): CharCategory {
+  if (isLetter(letter)) {
+    return CharCategory.alpha;
+  } else if (isNumber(letter)) {
+    return CharCategory.num;
+  } else if (letter === ' ') {
+    return CharCategory.space;
+  } else {
+    return CharCategory.other;
+  }
+}
+
+
 // From https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 function escapeRegExp(val): string {
   return val.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string

@@ -26,6 +26,7 @@
 
   <div *ngIf="data?.fields; let fields">
     <div *ngIf="fields?._type === 'jsonTable'">
+      <!-- DEBUG: <pre>{{features|json}}</pre -->
       <h3>Data in Table Form</h3>
       <table class="table table-bordered table-striped table-sm" *ngIf="fields.table; let rows" style="table-layout: fixed">
         <thead>

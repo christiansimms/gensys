@@ -4,6 +4,7 @@ import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {EChartsOption} from 'echarts';
 import {Counter} from '../../stats';
+import {TextFeatureService} from '../../text-feature.service';
 
 @Component({
   selector: 'app-reg-view-entity-stats',
@@ -16,9 +17,12 @@ export class RegViewEntityStatsComponent implements OnInit {
 
   chartOptions: EChartsOption[];
 
+  features: any;
+
   constructor(
     public route: ActivatedRoute,
     private http: HttpClient,
+    private textFeatureService: TextFeatureService,
   ) {
   }
 
@@ -31,6 +35,8 @@ export class RegViewEntityStatsComponent implements OnInit {
         if (entity.fields && entity.fields._type === 'jsonTable') {
           // It's a table.
           const table: any[][] = entity.fields.table;
+          // Experiment:
+          this.features = this.textFeatureService.computeFeaturesOnTable(table);
           this.chartOptions = [];
 
           // Loop through each column.
