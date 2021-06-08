@@ -28,11 +28,12 @@ export class FindDataComponent implements OnInit {
         this.dataLayers.push(data.fields.table);
         const [rows, cols] = getSizeOfTable(data.fields.table);
         this.dataLayers.push(create2dArray(rows, cols));
+        this.agentService.setDataLayers(this.dataLayers);
       });
     });
   }
 
   run(name: string): void {
-    this.agentService.run(this.dataLayers, name);
+    this.agentService.run(name);
   }
 }

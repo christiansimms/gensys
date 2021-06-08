@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
 
-class Agent {
+abstract class Agent {
   constructor() {
   }
+
+  abstract doStep(): void;
 }
 
 class BlobAgent extends Agent {
+  doStep(): void {
+
+  }
 }
 
 function makeAgent(name: string): Agent {
@@ -25,13 +30,18 @@ function makeAgent(name: string): Agent {
   providedIn: 'root'
 })
 export class AgentService {
+  dataLayers: any[] = [];
 
   constructor() {
   }
 
-  run(dataLayers: any[], name: string): void {
+  setDataLayers(dataLayers: any[]): void {
+    this.dataLayers = dataLayers;
+  }
+
+  run(name: string): void {
     const agent = makeAgent(name);
-    const layer1 = dataLayers[1];
+    const layer1 = this.dataLayers[1];
     layer1[0][0] = agent;
   }
 }
