@@ -30,6 +30,7 @@ import { RegViewEntityStatsComponent } from './reg/reg-view-entity-stats/reg-vie
 import { WorkComponent } from './reg/work/work.component';
 import { EditTableComponent } from './reg/edit-table/edit-table.component';
 import { FindDataComponent } from './reg/find-data/find-data.component';
+import { DisplayDataAsHtmlTableComponent } from './comp/display-data-as-html-table/display-data-as-html-table.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { FindDataComponent } from './reg/find-data/find-data.component';
     RegViewEntityStatsComponent,
     WorkComponent,
     EditTableComponent,
-    FindDataComponent
+    FindDataComponent,
+    DisplayDataAsHtmlTableComponent
   ],
   imports: [
     BrowserModule,

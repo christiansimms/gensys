@@ -1,0 +1,14 @@
+table, td, th {
+  border: 1px solid black;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td:empty::after {
+  content: "\00a0";
+}
+
