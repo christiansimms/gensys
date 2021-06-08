@@ -33,6 +33,6 @@ export class FindDataComponent implements OnInit {
   }
 
   run(name: string): void {
-    this.agentService.run(name);
+    this.agentService.run(this.dataLayers, name);
   }
 }

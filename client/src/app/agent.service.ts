@@ -29,7 +29,9 @@ export class AgentService {
   constructor() {
   }
 
-  run(name: string): void {
+  run(dataLayers: any[], name: string): void {
     const agent = makeAgent(name);
+    const layer1 = dataLayers[1];
+    layer1[0][0] = agent;
   }
 }
