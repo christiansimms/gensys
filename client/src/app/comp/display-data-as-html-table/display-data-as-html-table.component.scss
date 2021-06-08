@@ -1,3 +1,7 @@
+table {
+  transform: perspective(400px) rotateX(45deg);
+}
+
 table, td, th {
   border: 1px solid black;
 }
