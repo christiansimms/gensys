@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {ActivatedRoute, Params} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {create2dArray, getSizeOfTable} from '../../utils';
+import {AgentService} from '../../agent.service';
 
 @Component({
   selector: 'app-find-data',
@@ -16,6 +17,7 @@ export class FindDataComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     private http: HttpClient,
+    private agentService: AgentService,
   ) { }
 
   ngOnInit(): void {
@@ -28,5 +30,9 @@ export class FindDataComponent implements OnInit {
         this.dataLayers.push(create2dArray(rows, cols));
       });
     });
+  }
+
+  run(name: string): void {
+    this.agentService.run(name);
   }
 }

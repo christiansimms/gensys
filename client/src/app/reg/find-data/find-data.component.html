@@ -10,13 +10,13 @@
   <h1>Find Data in Table</h1>
   <p>
     Actions:
-    <a routerLink="/reg/entity/{{row.id}}/add">Add Child</a>
+    <button class="btn btn-outline-primary btn-sm" (click)="run('blob')">Run Blob</button>
   </p>
 
   <div><strong>Id:</strong> {{row.id}}</div>
   <div><strong>Name:</strong> {{row.name}}</div>
   <div><strong>Type:</strong> {{row.type}}</div>
-  <br/>
+  <br/><br/><br/>
   <div>
     <div *ngFor="let dataLayer of dataLayers">
       <app-display-data-as-html-table [dataTable]="dataLayer"></app-display-data-as-html-table>
