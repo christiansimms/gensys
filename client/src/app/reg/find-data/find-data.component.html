@@ -18,9 +18,9 @@
   <div><strong>Type:</strong> {{row.type}}</div>
   <br/>
   <div>
-    <app-display-data-as-html-table [data]="row.fields"></app-display-data-as-html-table>
-    <app-display-data-as-html-table [data]="row.fields"></app-display-data-as-html-table>
-    <app-display-data-as-html-table [data]="row.fields"></app-display-data-as-html-table>
+    <div *ngFor="let dataLayer of dataLayers">
+      <app-display-data-as-html-table [dataTable]="dataLayer"></app-display-data-as-html-table>
+    </div>
   </div>
   <br/>
 

@@ -1,5 +1,5 @@
-<div *ngIf="data?._type === 'jsonTable'">
-  <table *ngIf="data.table; let rows">
+<div>
+  <table *ngIf="dataTable; let rows">
     <tbody>
     <tr *ngFor="let row of rows; let rowIndex=index">
       <td *ngFor="let col of row; let colIndex=index" [attr.data-row-col]="rowIndex + '-' + colIndex">{{col}}</td>

@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class DisplayDataAsHtmlTableComponent implements OnInit {
 
   @Input()
-  data: any;
+  dataTable: any;
 
   constructor() { }
 

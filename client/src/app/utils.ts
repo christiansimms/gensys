@@ -96,6 +96,16 @@ export function range(start: number, end: number): number[] {
   return new Array(end - start + 1).fill(undefined).map((el, ind) => ind + start);
 }
 
+export function create2dArray(rows: number, cols: number): any[][] {
+  return Array.from(Array(rows), () => new Array(cols));
+}
+
+export function getSizeOfTable(table: any[][]): [number, number] {
+  const rows = table.length;
+  const cols = table[0].length;
+  return [rows, cols];
+}
+
 // export function isStringNumber(value): boolean {
 //   return !isNaN(Number(value));
 // }
