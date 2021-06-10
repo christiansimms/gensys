@@ -25,8 +25,8 @@ class BlobAgent extends Agent {
       return;
     }
 
-    // Look around to move.
-
+    // Move down diagonally.
+    this.agentService.moveAgent(this, this.position.x + 1, this.position.y + 1, this.position.z + 1);
   }
 
   toString(): string {
@@ -60,13 +60,17 @@ export class AgentService {
     this.dataLayers = dataLayers;
   }
 
+  getValue(x: number, y: number, z: number): any {
+    return this.dataLayers[z][y][x];
+  }
+
   run(name: string): void {
     const agent = makeAgent(name, this);
     this.moveAgent(agent, 0, 0, 1);
   }
 
   // Update 2 things when moving: agent's position, plus their spreadsheet location.
-  private moveAgent(agent: Agent, x: number, y: number, z: number): void {
+  moveAgent(agent: Agent, x: number, y: number, z: number): void {
     // Remove from spreadsheet.
     if (agent.position) {
       const oldCell = this.dataLayers[agent.position.z][agent.position.y][agent.position.x];
