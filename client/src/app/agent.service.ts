@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {isUndefined} from './utils';
 
 export interface Position {
   x: number;
@@ -16,7 +17,8 @@ abstract class Agent {
     this.uniqueId = ++UNIQUE_ID;
   }
 
-  getValue(xOffset: number, yOffset: number): any {
+  getValue(xOffset: number, yOffset: number): Agent[] {
+    return this.agentService.getValue(this.position.x + xOffset, this.position.y + yOffset, this.position.z - 1);
   }
 
   abstract doStep(): void;
@@ -25,7 +27,7 @@ abstract class Agent {
 class BlobAgent extends Agent {
   doStep(): void {
     // Do nothing if we have a value.
-    if (this.getValue(0, 0)) {
+    if (this.getValue(0, 0).length > 0) {
       return;
     }
 
@@ -47,6 +49,9 @@ function makeAgent(name: string, agentService: AgentService): Agent {
   }
 }
 
+// 3d array of an array of agents.
+export type Grid = Agent[][][][];
+
 // const agents: {[key: string]: Agent} = {
 //   blob: BlobAgent,
 // };
@@ -56,16 +61,16 @@ function makeAgent(name: string, agentService: AgentService): Agent {
 })
 export class AgentService {
   agentIndex: {[key: number]: Agent} = {};
-  dataLayers: any[] = [];
+  dataLayers: Grid = [];
 
   constructor() {
   }
 
-  setDataLayers(dataLayers: any[]): void {
+  setDataLayers(dataLayers: Grid): void {
     this.dataLayers = dataLayers;
   }
 
-  getValue(x: number, y: number, z: number): any {
+  getValue(x: number, y: number, z: number): Agent[] {
     return this.dataLayers[z][y][x];
   }
 
@@ -87,10 +92,22 @@ export class AgentService {
 
   // Update 2 things when moving: agent's position, plus their spreadsheet location.
   moveAgent(agent: Agent, x: number, y: number, z: number): void {
-    // Remove from spreadsheet.
+    // Remove from spreadsheet if on spreadsheet.
     if (agent.position) {
-      this.dataLayers[agent.position.z][agent.position.y][agent.position.x] = null;
-      // console.log('OLD CELL:', oldCell);
+      // Validate new position.
+      if (isUndefined(this.dataLayers[z])
+        || isUndefined(this.dataLayers[z][y])
+        || isUndefined(this.dataLayers[z][y][x])
+      ) {
+        console.error(`Skip bad move of agent ${agent.uniqueId}: ${x}, ${y}, ${z}`);
+        return;
+      }
+
+      const arrIndex = this.dataLayers[agent.position.z][agent.position.y][agent.position.x].indexOf(agent);
+      if (arrIndex < 0)  {
+        throw new Error('Did not find agent in spreadsheet');
+      }
+      this.dataLayers[agent.position.z][agent.position.y][agent.position.x].splice(arrIndex, 1);
     }
 
     // Update agent.
@@ -98,6 +115,6 @@ export class AgentService {
     agent.position = {x, y, z};
 
     // Add to spreadsheet.
-    this.dataLayers[agent.position.z][agent.position.y][agent.position.x] = agent;
+    this.dataLayers[agent.position.z][agent.position.y][agent.position.x].push(agent);
   }
 }

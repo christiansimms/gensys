@@ -1,7 +1,4 @@
-// https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
-// crs added Number
 
-import {last} from "rxjs/operators";
 
 export function smartSplit(val: string, delim: string): Array<string> {
   if (!val) {
@@ -35,6 +32,8 @@ function flatten(a: any[]): any {
   return concat.apply([], a);
 }
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm
+// crs added Number
 export let intrinsicTypes =
   'Boolean,String,Date,RegExp,Blob,File,FileList,ArrayBuffer,DataView,Uint8ClampedArray,ImageData,Map,Set,Number'
     .split(',').concat(
@@ -97,7 +96,8 @@ export function range(start: number, end: number): number[] {
 }
 
 export function create2dArray(rows: number, cols: number): any[][] {
-  return Array.from(Array(rows), () => new Array(cols));
+  // return Array.from(Array(rows), () => new Array(cols));
+  return [...Array(rows)].map(x => Array(cols).fill([]));
 }
 
 export function getSizeOfTable(table: any[][]): [number, number] {
@@ -224,4 +224,8 @@ export function unixTimeFormat(includeMillis: boolean = false): string {
     ':' + ('0' + u.getUTCMinutes()).slice(-2) +
     ':' + ('0' + u.getUTCSeconds()).slice(-2) +
     (includeMillis ? ('.' + (u.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5)) : '');
+}
+
+export function isUndefined(val: any): any {
+  return val === undefined;
 }
