@@ -2,7 +2,9 @@
   <table *ngIf="dataTable; let rows">
     <tbody>
     <tr *ngFor="let row of rows; let rowIndex=index">
-      <td *ngFor="let col of row; let colIndex=index" [attr.data-row-col]="rowIndex + '-' + colIndex">{{col}}</td>
+      <td *ngFor="let col of row; let colIndex=index" [attr.data-row-col]="rowIndex + '-' + colIndex">
+        {{col.length}}
+      </td>
     </tr>
     </tbody>
   </table>

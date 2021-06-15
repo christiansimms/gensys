@@ -17,8 +17,8 @@ abstract class Agent {
     this.uniqueId = ++UNIQUE_ID;
   }
 
-  getValue(xOffset: number, yOffset: number): Agent[] {
-    return this.agentService.getValue(this.position.x + xOffset, this.position.y + yOffset, this.position.z - 1);
+  getBottomValue(xOffset: number, yOffset: number): AgentList {
+    return this.agentService.getBottomValue(this.position.x + xOffset, this.position.y + yOffset);
   }
 
   abstract doStep(): void;
@@ -27,7 +27,7 @@ abstract class Agent {
 class BlobAgent extends Agent {
   doStep(): void {
     // Do nothing if we have a value.
-    if (this.getValue(0, 0).length > 0) {
+    if (this.getBottomValue(0, 0)) {
       return;
     }
 
@@ -49,8 +49,27 @@ function makeAgent(name: string, agentService: AgentService): Agent {
   }
 }
 
-// 3d array of an array of agents.
-export type Grid = Agent[][][][];
+class AgentList {
+  agents: Agent[] = [];
+  toString(): string {
+    return 'agents';
+  }
+
+  indexOf(agent: Agent): number {
+    return this.agents.indexOf(agent);
+  }
+
+  splice(start: number, count: number): void {
+    this.agents.splice(start, count);
+  }
+
+  push(agent: Agent): void {
+   this.agents.push(agent) ;
+  }
+}
+
+// 3d array of a list of agents.
+export type Grid = AgentList[][][];
 
 // const agents: {[key: string]: Agent} = {
 //   blob: BlobAgent,
@@ -70,8 +89,8 @@ export class AgentService {
     this.dataLayers = dataLayers;
   }
 
-  getValue(x: number, y: number, z: number): Agent[] {
-    return this.dataLayers[z][y][x];
+  getBottomValue(x: number, y: number): any {
+    return this.dataLayers[0][y][x];
   }
 
   run(name: string): void {

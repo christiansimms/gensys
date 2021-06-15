@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Grid} from '../../agent.service';
 
 @Component({
   selector: 'app-display-data-as-html-table',
@@ -8,7 +9,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class DisplayDataAsHtmlTableComponent implements OnInit {
 
   @Input()
-  dataTable: any;
+  dataTable: Grid;
 
   constructor() { }
 
